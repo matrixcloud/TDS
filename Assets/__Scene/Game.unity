@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11ed7f90f0cc214f807e943c4e5b8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 10
   moveSpeed: 3
 --- !u!54 &837964131
 Rigidbody:
@@ -519,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815abfcc2561c1e47837b4b07329edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 5
 --- !u!1 &1025360146
 GameObject:
   m_ObjectHideFlags: 0

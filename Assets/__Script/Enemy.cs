@@ -2,12 +2,12 @@
 using System.Collections;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour {
+public class Enemy : LivingEntity {
     private NavMeshAgent agent;
     private Transform target;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
