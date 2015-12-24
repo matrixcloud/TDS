@@ -6,6 +6,7 @@ public class Enemy : LivingEntity {
     private NavMeshAgent agent;
     private Transform target;
 
+
 	// Use this for initialization
 	protected override void Start () {
         agent = GetComponent<NavMeshAgent>();
@@ -17,7 +18,7 @@ public class Enemy : LivingEntity {
     IEnumerator UpdatePath() {
         float refreshRate = .25f;
 
-        while(target != null) {
+        while(target != null && !dead) {
             agent.SetDestination(target.position);
             yield return new WaitForSeconds(refreshRate);
         }
