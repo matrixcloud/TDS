@@ -11,6 +11,7 @@ public class Player : LivingEntity {
 
 	// Use this for initialization
 	protected override void Start () {
+        base.Start();
         controller = GetComponent<PlayerController>();
         gunController = GetComponent<GunController>();
         viewCamera = Camera.main;

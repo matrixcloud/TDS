@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11ed7f90f0cc214f807e943c4e5b8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingHealth: 10000
   moveSpeed: 5
 --- !u!54 &837964131
 Rigidbody:
@@ -542,10 +542,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemyCount: 1
+  - enemyCount: 3
     spawnInterval: 1
-  - enemyCount: 2
-    spawnInterval: .5
+  - enemyCount: 3
+    spawnInterval: 1
   enemy: {fileID: 11403872, guid: b0cc809c2f8fb6a4ab5c326a191aeee6, type: 2}
 --- !u!4 &1770864505
 Transform:
