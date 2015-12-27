@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : LivingEntity {
     public enum State { Idle, Chasing, Attacking}
+    public ParticleSystem deathEffect;
     public float damage = 1;
     private State currentState;
     private NavMeshAgent agent;
@@ -37,6 +38,13 @@ public class Enemy : LivingEntity {
 
             StartCoroutine(UpdatePath()); 
         }
+    }
+
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) {
+        if (damage >= health) {
+            Instantiate(deathEffect, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection));
+        }
+        base.TakeHit(damage, hitPoint, hitDirection);
     }
 
     void OnTargetDeath() {

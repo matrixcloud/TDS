@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6580620}
   - 23: {fileID: 2356368}
   - 208: {fileID: 20819044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Carve
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
