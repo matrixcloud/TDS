@@ -25,7 +25,8 @@ public class Enemy : LivingEntity {
         skinMaterial = GetComponent<Renderer>().material;
         originColor = skinMaterial.color;
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+	    GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj) {target = playerObj.transform;}
         if (target != null) {
 	        currentState = State.Chasing;
             hasTarget = true;

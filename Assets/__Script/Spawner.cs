@@ -18,6 +18,7 @@ public class Spawner : MonoBehaviour {
     private Vector3 oldCampPosition;
     private bool isCamping = false;
     private bool isDiabled = false;
+    public event System.Action<int> OnNewWave;
 
     void Start() {
         playerEntiy = FindObjectOfType<Player>();
@@ -28,6 +29,7 @@ public class Spawner : MonoBehaviour {
         oldCampPosition = player.position;
 
         mapGenerator = FindObjectOfType<MapGenerator>();
+        OnNewWave += mapGenerator.OnNewWave;
         NextWave();
     }
 
@@ -77,6 +79,10 @@ public class Spawner : MonoBehaviour {
         }
     }
 
+    private void ResetPlayerPosition() {
+        player.position = mapGenerator.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+    }
+
     private void OnPlayerDeath() {
         isDiabled = true;
     }
@@ -84,11 +90,13 @@ public class Spawner : MonoBehaviour {
     private void NextWave() {
         currentWaveNumber++;
         if (currentWaveNumber <= waves.Length) {
-            Debug.Log("Wave: " + currentWaveNumber);
             currentWave = waves[currentWaveNumber - 1];
-
+            if (OnNewWave != null) {
+                OnNewWave(currentWaveNumber);
+            }
             enemiesRemaingToSpawn = currentWave.enemyCount;
-            enemiesRemaingAlive = enemiesRemaingToSpawn; 
+            enemiesRemaingAlive = enemiesRemaingToSpawn;
+            ResetPlayerPosition(); 
         }
     }
 

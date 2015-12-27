@@ -19,13 +19,12 @@ public class MapGenerator : MonoBehaviour {
     private Queue<Coord> shuffleTileCoords;
     private Queue<Coord> shuffleOpenTileCoords;
     private Transform[,] tileMap;
-
     private Map currentMap;
 
-	// Use this for initialization
-	void Start () {
-	    GenerateMap();
-	}
+    public void OnNewWave(int waveNumber) {
+        mapIndex = waveNumber - 1;
+        GenerateMap();
+    }
 
     public void GenerateMap() {
         currentMap = maps[mapIndex];
