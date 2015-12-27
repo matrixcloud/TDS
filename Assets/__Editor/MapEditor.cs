@@ -5,9 +5,15 @@ using UnityEditor;
 [CustomEditor(typeof(MapGenerator))]
 public class MapEditor : Editor {
     public override void OnInspectorGUI() {
-        base.OnInspectorGUI();
-
         MapGenerator generator = target as MapGenerator;
-        generator.GenerateMap();
+
+        if (DrawDefaultInspector()) {
+            generator.GenerateMap();
+        }
+
+        if (GUILayout.Button("Generate Map")) {
+            generator.GenerateMap();
+        }
+
     }
 }
