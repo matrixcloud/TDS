@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(BoxCollider))]
 public class MapGenerator : MonoBehaviour {
     public Map[] maps;
     public int mapIndex;
@@ -16,6 +17,8 @@ public class MapGenerator : MonoBehaviour {
     public float tileSize = 1f;
     private List<Coord> allTileCoords;
     private Queue<Coord> shuffleTileCoords;
+    private Queue<Coord> shuffleOpenTileCoords;
+    private Transform[,] tileMap;
 
     private Map currentMap;
 
@@ -26,6 +29,7 @@ public class MapGenerator : MonoBehaviour {
 
     public void GenerateMap() {
         currentMap = maps[mapIndex];
+        tileMap = new Transform[currentMap.mapSize.x, currentMap.mapSize.y];
         System.Random prng = new System.Random(currentMap.seed);
         GetComponent<BoxCollider>().size = new Vector3(currentMap.mapSize.x*tileSize, .05f, currentMap.mapSize.y*tileSize);
 
@@ -61,6 +65,7 @@ public class MapGenerator : MonoBehaviour {
                 Transform newTile = Instantiate(tilePrefab, tilePos, Quaternion.Euler(Vector3.right * 90)) as Transform;
                 newTile.localScale = Vector3.one * (1 - outlinePercent) * tileSize;
                 newTile.parent = mapHolder;
+                tileMap[x, y] = newTile;
             }
         }
 
@@ -70,6 +75,7 @@ public class MapGenerator : MonoBehaviour {
         bool[,] obstacleMap = new bool[(int)currentMap.mapSize.x,(int)currentMap.mapSize.y];
         int obstacleCount = (int)(currentMap.mapSize.x * currentMap.mapSize.y * currentMap.obstaclePercent);
         int currentObstacleCount = 0;
+        List<Coord> allOpenTileCoords = new List<Coord>(allTileCoords);
 
         for (int i = 0; i < obstacleCount; i++) {
             Coord randomCoord = GetRandomCoord();
@@ -89,12 +95,15 @@ public class MapGenerator : MonoBehaviour {
                 float colorPercent = randomCoord.y/(float)currentMap.mapSize.y;
                 obstacleMaterial.color = Color.Lerp(currentMap.foregroundColor, currentMap.backgroundColor, colorPercent);
                 obstacleRenderer.sharedMaterial = obstacleMaterial;
+
+                allOpenTileCoords.Remove(randomCoord);
             }
             else {
                 obstacleMap[randomCoord.x, randomCoord.y] = false;
                 currentObstacleCount--;
             }
         }
+        shuffleOpenTileCoords = new Queue<Coord>(Utility.ShuffleArray(allOpenTileCoords.ToArray(), currentMap.seed));
 
         //*******************************************
         // Spawn nav mesh mask
@@ -154,10 +163,24 @@ public class MapGenerator : MonoBehaviour {
         return new Vector3(-currentMap.mapSize.x / 2f + .5f + x, 0, -currentMap.mapSize.y / 2f + .5f + y) * tileSize;
     }
 
+    public Transform GetTileFromPosition(Vector3 position) {
+        int x = Mathf.RoundToInt(position.x / tileSize + (currentMap.mapSize.x - 1) / 2f);
+        int y = Mathf.RoundToInt(position.z / tileSize + (currentMap.mapSize.y - 1) / 2f);
+        x = Mathf.Clamp(x, 0, tileMap.GetLength(0) - 1);
+        y = Mathf.Clamp(y, 0, tileMap.GetLength(1) - 1);
+        return tileMap[x, y];
+    }
+
     public Coord GetRandomCoord() {
         Coord randomCoord = shuffleTileCoords.Dequeue();
         shuffleTileCoords.Enqueue(randomCoord);
         return randomCoord;
+    }
+
+    public Transform GetRandomOpenTile() {
+        Coord randomCoord = shuffleOpenTileCoords.Dequeue();
+        shuffleOpenTileCoords.Enqueue(randomCoord);
+        return tileMap[randomCoord.x, randomCoord.y];
     }
 
     [System.Serializable]
