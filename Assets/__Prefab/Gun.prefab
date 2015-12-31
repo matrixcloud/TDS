@@ -40,7 +40,22 @@ GameObject:
   m_Component:
   - 4: {fileID: 475080}
   m_Layer: 0
-  m_Name: Muzzle
+  m_Name: Muzzle 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &116998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 403162}
+  m_Layer: 0
+  m_Name: Muzzle 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +161,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &168934
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -176,6 +191,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &403162
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .050999999, y: .349999994, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411456}
+  m_RootOrder: 2
 --- !u!4 &407478
 Transform:
   m_ObjectHideFlags: 1
@@ -199,8 +226,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466672}
-  - {fileID: 475080}
+  - {fileID: 478126}
+  - {fileID: 403162}
   - {fileID: 481444}
+  - {fileID: 475080}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &417328
@@ -273,12 +302,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .349999994, z: 1.5}
+  m_LocalPosition: {x: -.0780000016, y: .349999994, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 478126}
+  m_Children: []
   m_Father: {fileID: 411456}
-  m_RootOrder: 1
+  m_RootOrder: 4
 --- !u!4 &478126
 Transform:
   m_ObjectHideFlags: 1
@@ -286,14 +314,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .349999994, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489590}
   - {fileID: 407478}
   - {fileID: 472822}
-  m_Father: {fileID: 475080}
-  m_RootOrder: 0
+  m_Father: {fileID: 411456}
+  m_RootOrder: 1
 --- !u!4 &481444
 Transform:
   m_ObjectHideFlags: 1
@@ -305,7 +333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 411456}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &489590
 Transform:
   m_ObjectHideFlags: 1
@@ -481,12 +509,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf5ba1edbf58d74a914fb0ea69411a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 475080}
+  fireMode: 0
+  muzzles:
+  - {fileID: 403162}
+  - {fileID: 475080}
   projectile: {fileID: 11437120, guid: fad8be05dc79db24aa4951b934b0e59a, type: 2}
   msBetweenShots: 100
   muzzleVelocity: 35
   shell: {fileID: 482622, guid: 9d6b39bfa2427f8488cad41c895a9978, type: 2}
   shellEjection: {fileID: 481444}
+  burstCount: 30
 --- !u!212 &21235248
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -567,6 +599,10 @@ Prefab:
       propertyPath: shell
       value: 
       objectReference: {fileID: 482622, guid: 9d6b39bfa2427f8488cad41c895a9978, type: 2}
+    - target: {fileID: 0}
+      propertyPath: burstCount
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172672}

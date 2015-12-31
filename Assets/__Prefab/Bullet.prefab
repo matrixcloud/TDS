@@ -12,6 +12,7 @@ GameObject:
   - 23: {fileID: 2368204}
   - 114: {fileID: 11437120}
   - 114: {fileID: 11409070}
+  - 96: {fileID: 9677844}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .337000012, z: 1.6415}
+  m_LocalPosition: {x: -16.7019997, y: 3.67968559, z: 1.42299998}
   m_LocalScale: {x: .0624798574, y: .0624797866, z: .143192455}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,6 +65,53 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113840}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!96 &9677844
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113840}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 76e3b72038a261649b2a8da4df1d0550, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: .100000001
+  m_StartWidth: .0599999987
+  m_EndWidth: .00499999989
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 2684354559
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 1677721599
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 1023410175
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!114 &11409070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,6 +138,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+  trailColor: {r: .921369731, g: .970588207, b: .0785034746, a: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -108,6 +157,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lifeTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Time
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trailColor.r
+      value: .921369731
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trailColor.g
+      value: .970588207
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: trailColor.b
+      value: .0785034746
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
